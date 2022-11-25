@@ -8,7 +8,14 @@ class RegisterController(Resource):
         parser = reqparse.RequestParser()
         args = parser.parse_args()
         self.repo.insert(args)
-    def get(self, public_id):
-         self.repo.get(public_id)
+    def get(self):
+        return "Test"
+    #def get(self, public_id):
+         #self.repo.get(public_id)
+
     def delete(self, public_id):
         pass
+
+class TestController(Resource):
+    def get():
+        return "Test"
