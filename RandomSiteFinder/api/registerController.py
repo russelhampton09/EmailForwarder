@@ -2,16 +2,20 @@ from flask_restful import Resource,reqparse
 from data.iemail_repo import IEmailRepo
 from data.emailaddress import EmailAddress
 
-parser = reqparse.RequestParser()
-parser.add_argument('address', type=str)
+
 
 class RegisterController(Resource):
     def __init__(self, email_repo: IEmailRepo):
         self.repo = email_repo
     def put(self):
-        args = parser.parse_args()
-        email = EmailAddress(args['address'])
-        self.repo.insert(email)
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument('address', type=str, help='email address')
+            args = parser.parse_args()
+            email = EmailAddress(address=args['address'])
+            self.repo.insert(email)
+        except Exception as err:
+            print(f"Something went wrong {err=}, {type(err)=}")
         return email.publicId
     def get(self):
         return "Test"
