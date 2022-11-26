@@ -1,10 +1,10 @@
 from sqlalchemy import String, DateTime, Integer, Column, create_engine
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base
-from datetime import datetime
+from sqlalchemy.orm import DeclarativeBase
+import datetime
 import uuid
 
-class EmailAddress(declarative_base()):
+class EmailAddress(DeclarativeBase):
     __tablename__ = "emailaddress"
     id = Column(Integer, primary_key=True)
     publicId = UUID()
@@ -13,7 +13,7 @@ class EmailAddress(declarative_base()):
 
     def __init__(self, **kwargs):
         publicId=uuid.uuid1()
-        date=datetime.time()
+        date=datetime.datetime.now()
         address = kwargs['address']
 
     def __repr__(self):

@@ -2,8 +2,6 @@ from flask_restful import Resource,reqparse
 from data.iemail_repo import IEmailRepo
 from data.emailaddress import EmailAddress
 
-
-
 class RegisterController(Resource):
     def __init__(self, email_repo: IEmailRepo):
         self.repo = email_repo

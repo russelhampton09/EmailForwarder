@@ -5,8 +5,8 @@ from data.iemail_repo import IEmailRepo
 
 class EmailRepository(IEmailRepo):
     def __init__(self, **kwargs):
-        engine = kwargs.get('engine')
-        if engine is None:
+        self.engine = kwargs.get('engine')
+        if self.engine is None:
             self.engine = create_engine("sqlite://", echo=True, future=True)
 
     def insert(self, obj):
