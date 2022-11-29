@@ -7,14 +7,16 @@ I have only used python for one off scripts. This is the first time I have writt
 
 ## Techs Used ##
 
-pip
-virtual env
+pip3-venv (apparently not included in python3 now)
 flask
-sqlalchemy
 python3
 aws beanstalk
 flask-rest
+flask-sqlalchemy
+flask-marshmallow
+A bunch of other random modules ubuntu now comes with in the global python space
 
+I chose flask-alchemy because it simplified the management of the sql engine life cycle
 ## Envrionment ##
 I used Ubuntu and visual studio code to do the work. 
 
