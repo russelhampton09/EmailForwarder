@@ -7,5 +7,5 @@ class IEmailTransactionRepo(metaclass=abc.ABCMeta):
     def insert(self, model: EmailTransaction):
         pass
     @abc.abstractclassmethod
-    def get(self, date) -> List[EmailTransaction]:
+    def get(self, address) -> List[EmailTransaction]:
         pass

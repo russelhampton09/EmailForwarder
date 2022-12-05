@@ -195,3 +195,6 @@ bin/
 include/
 
 pyvenv.cfg
+
+# VS Code stuff
+/.vscode

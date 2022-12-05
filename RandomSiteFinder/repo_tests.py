@@ -1,8 +1,8 @@
+import datetime
 import unittest
 from data import db, EmailTransaction
 from data.email_transaction_repo import EmailTransactionRepo
 from flask import Flask
-from flask_restful import Api
 
 class TestEmailRepo(unittest.TestCase):
     def test_inserts_gets_transactions(self):
@@ -21,13 +21,26 @@ class TestEmailRepo(unittest.TestCase):
         db.create_all()
 
         repo = EmailTransactionRepo(db)
-        repo.insert(EmailTransaction('test@gmail.com'))
-        result = repo.get('testdatenotusedyet')
+        repo.insert(EmailTransaction(address='test@gmail.com'))
+        repo.insert(EmailTransaction(address='test@gmail.com'))
+        repo.insert(EmailTransaction(address='test@gmail.com'))
+        repo.insert(EmailTransaction(address='test@gmail.com'))
+        repo.insert(EmailTransaction(address='test@gmail.com'))
+        result = repo.get('test@gmail.com')
         self.assertTrue(result)
 
         #cleanup
         db.drop_all()
 
+    def test_email_transaction_recent(self):
+        """
+        Check that email transactions correctly reports if it is older than 5 minutes
+        """
+        transaction = EmailTransaction(address='test@gmail.com')
+        self.assertTrue(transaction.is_recent()) 
+        transaction = EmailTransaction(address='test@gmail.com',\
+            date=datetime.datetime.now() - datetime.timedelta(minutes=10))
+        self.assertFalse(transaction.is_recent())
 
 if __name__ == '__main__':
     unittest.main()
