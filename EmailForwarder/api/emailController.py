@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask_restful import Resource,reqparse
 from data.email_transaction_repo import IEmailTransactionRepo
-from data import EmailTransaction
+from data.email_transaction import EmailTransaction
 from api import ma
 from email_sender import IEmailSender
 
@@ -28,7 +28,13 @@ class EmailController(Resource):
             args = parser.parse_args()
             email_transaction = EmailTransaction(**args)
 
-            latest_transaction = self.repo.get(**args).first()
+            latest_transactions = self.repo.get(**args)
+            latest_transaction = None
+            
+            if latest_transactions is not None and latest_transactions:
+                latest_transaction = latest_transactions[0]
+
+            
             if latest_transaction is not None and latest_transaction.is_recent():
                 return "Email sent recently to that address, rate limiting"
             

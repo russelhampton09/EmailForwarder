@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime, timedelta
-db = SQLAlchemy()
+from data import db
 
 class EmailTransaction(db.Model):
     __tablename__ = "EmailTransactions"
