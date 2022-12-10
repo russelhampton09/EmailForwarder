@@ -1,5 +1,3 @@
-import os
-
 class Config(object):
     def __init__(self, config):
         self._config = config # set it to conf
@@ -8,20 +6,10 @@ class Config(object):
         if property_name not in self._config.keys(): # we don't want KeyError
             return None  # just return None if not found
         return self._config[property_name]
-
-class EnvConfig(Config): 
-    def __init__(self):
-        configs = {}
-        configs["SENDER_EMAIL"] = os.environ.get("SENDER_EMAIL")
-        configs["ENVIRONMENT"] = os.environ.get("ENVIRONMENT")
-        configs["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
-        configs["SENDER_MESSAGE"] = os.environ.get("SENDER_MESSAGE")
-        configs["SENDER_PASSWORD"] = os.environ.get("SENDER_PASSWORD")
-        Config.__init__(self, configs) 
-
+    
     @property
-    def sender_password(self):
-        return self.get_property("SENDER_PASSWORD")
+    def sender_key(self):
+        return self.get_property("SENDER_KEY_HASH")
         
     @property
     def sender_email(self):
@@ -38,4 +26,6 @@ class EnvConfig(Config):
     @property
     def sql_db_uri(self):
         return self.get_property("SQLALCHEMY_DATABASE_URI")
+    
+
     

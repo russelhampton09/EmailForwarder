@@ -4,8 +4,8 @@ from data import db
 from data.email_transaction_repo import EmailTransactionRepo
 from api.emailController import EmailController
 from flask_restful import Api
-from config.config import EnvConfig
-from email_sender import EmailSender
+from config.env_config import EnvConfig
+from services.email_sender import EmailSender
 
 config = EnvConfig()
 app = Flask(__name__)
@@ -20,10 +20,10 @@ with app.app_context():
 api = Api(app)
 ma = Marshmallow(app)
 email_trans_repo = EmailTransactionRepo(db)
-email_sender = EmailSender(password=config.sender_password, sender=config.sender_email)
+email_sender = EmailSender(config)
 
 def init():
-    api.add_resource(EmailController, '/email',resource_class_kwargs={'email_repo': email_trans_repo, 'email_sender':email_sender})
+    api.add_resource(EmailController, '/email',resource_class_kwargs={'email_repo': email_trans_repo, 'email_sender':email_sender, 'config':config})
     app.run(debug=False, port="5001")
 
 if __name__ == '__main__':

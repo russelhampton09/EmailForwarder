@@ -3,7 +3,7 @@ from flask_restful import Resource,reqparse
 from data.email_transaction_repo import IEmailTransactionRepo
 from data.email_transaction import EmailTransaction
 from api import ma
-from email_sender import IEmailSender
+from services.email_sender import IEmailSender
 
 class EmailTransactionSchema(ma.Schema):
     class Meta:
@@ -38,7 +38,7 @@ class EmailController(Resource):
             if latest_transaction is not None and latest_transaction.is_recent():
                 return "Email sent recently to that address, rate limiting"
             
-            self.email_sender.send(self.message, email_transaction.address)    
+            self.email_sender.send(email_transaction.address)    
         except Exception as err:
             print(f"Something went wrong {err=}, {type(err)=}")
             return "Message not sent! Something went wrong..."
