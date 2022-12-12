@@ -77,6 +77,8 @@ pip-delete-this-directory.txt
 
 .vscode/
 
+database.db
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
