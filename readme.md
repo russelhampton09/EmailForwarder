@@ -10,7 +10,6 @@ I tried to play with as many python concepts as possible given the simple premis
 At the time of writing my day job is C#, but I found python to be quite fun to write as it has incredibly little boiler plate code.
 
 
-
 ## Techs Used ##
 
 pip3-venv (apparently not included in python3 now)
