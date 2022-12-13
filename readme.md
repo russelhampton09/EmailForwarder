@@ -1,28 +1,48 @@
-# RandomSiteFinder #
+# Email forwarder #
 
 ## Purpose ##
 
-The app itself simply chains google searches to find something random, and then it emails it to someone on request. The real purpose of this app is to play around with python in a way that has a functional results.
-I have only used python for one off scripts. This is the first time I have written an app using python, and handled things like life cycles as well as project structure.
+This app simply forwards messages to email addresses it gets via curl using a google service account. 
+The point of the app was to play with python.
+My previous python experience was simple scripts. 
+I tried to play with as many python concepts as possible given the simple premise of the app, so some of the style is inconsistent. 
+
+At the time of writing my day job is C#, but I found python to be quite fun to write as it has incredibly little boiler plate code.
+
+
 
 ## Techs Used ##
 
 pip3-venv (apparently not included in python3 now)
 flask
 python3
-aws beanstalk
 flask-rest
 flask-sqlalchemy
 flask-marshmallow
-A bunch of other random modules ubuntu now comes with in the global python space
+docker
+aws lightsail
 
-I chose flask-alchemy because it simplified the management of the sql engine life cycle
+I have also included the requirements.txt
+
 ## Envrionment ##
+
 I used Ubuntu and visual studio code to do the work. 
+The new window's terminal is very good.
+AWS cli and AWS lightsail were used to deploy.
+Docker build for images.
 
 ## Hosting ##
 
-Aws to host. Can be found here -> <insert public facing url>
+AWS lightsail to host. Very easy to to set up!
 
 ## How to Use ##
-<insert description of restful controller when done>
+
+Example payload and curl. The app is hosted on AWS currently, but I did not list here.
+
+curl --location --request PUT 'http://<hostedurl>:5001/email' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "address":"russel.hampton@gmail.com"
+}'
+
+It will rate limit if you try to send too many emails to the same address.
