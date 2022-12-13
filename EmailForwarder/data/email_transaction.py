@@ -18,4 +18,4 @@ class EmailTransaction(db.Model):
         return  f"User(id={self.id!r}, address={self.address!r}, date={self.date!r}"
 
     def is_recent(self):
-        return self.date > datetime.now() - timedelta(minutes=5)
+        return self.date > datetime.now() - timedelta(minutes=10)

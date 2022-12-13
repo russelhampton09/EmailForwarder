@@ -1,6 +1,6 @@
 import datetime
 import unittest
-from data import db, EmailTransaction
+from data.email_transaction import db, EmailTransaction
 from data.email_transaction_repo import EmailTransactionRepo
 from flask import Flask
 
