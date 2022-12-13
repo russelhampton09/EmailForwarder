@@ -29,7 +29,7 @@ def hello_world():
 
 def init():
     api.add_resource(EmailController, '/email',resource_class_kwargs={'email_repo': email_trans_repo, 'email_sender':email_sender, 'config':config})
-    app.run(debug=False, port="5001")
+    app.run(host='0.0.0.0', port="5001")
 
 if __name__ == '__main__':
     init()
