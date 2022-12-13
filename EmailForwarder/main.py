@@ -22,6 +22,11 @@ ma = Marshmallow(app)
 email_trans_repo = EmailTransactionRepo(db)
 email_sender = EmailSender(config)
 
+### Default splash page in case someone navigates here
+@app.route('/')
+def hello_world():
+   return "Hello! Russel Hampton's flask api"
+
 def init():
     api.add_resource(EmailController, '/email',resource_class_kwargs={'email_repo': email_trans_repo, 'email_sender':email_sender, 'config':config})
     app.run(debug=False, port="5001")
